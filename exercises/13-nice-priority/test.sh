@@ -30,7 +30,10 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/exercise.sh"
 
-run_tests() { assert_eq "$(higher_nice_means)" "lower-priority" nice; }
+run_tests() {
+  assert_eq "$(higher_nice_means)" "lower-priority" nice
+  assert_eq "$(ulimit_nofile_flag)" "-n" nofile
+}
 
 run_tests
 

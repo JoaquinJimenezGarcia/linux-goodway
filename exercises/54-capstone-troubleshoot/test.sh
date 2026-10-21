@@ -30,7 +30,10 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/exercise.sh"
 
-run_tests() { assert_eq "$(postmortem_required_section)" "root-cause" pm; }
+run_tests() {
+  assert_eq "$(postmortem_required_section)" "root-cause" pm
+  assert_eq "$(postmortem_also_include)" "timeline" tl
+}
 
 run_tests
 

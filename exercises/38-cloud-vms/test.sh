@@ -30,7 +30,10 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/exercise.sh"
 
-run_tests() { assert_eq "$(cloud_init_purpose)" "first-boot-config" ci; }
+run_tests() {
+  assert_eq "$(cloud_init_purpose)" "first-boot-config" ci
+  assert_eq "$(cloud_metadata_role)" "instance-identity" meta
+}
 
 run_tests
 

@@ -9,3 +9,7 @@ octal_to_human() {
   local o=$1
   echo "$(digit ${o:0:1})$(digit ${o:1:1})$(digit ${o:2:1})"
 }
+is_world_writable() {
+  local d=${1: -1}
+  case "$d" in 2|3|6|7) echo yes ;; *) echo no ;; esac
+}

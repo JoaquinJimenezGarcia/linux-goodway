@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 hello() {
   local name=${1:-world}
-  # TODO print Hello, <name>
+  # TODO: Hello, <name>
+  echo ""
+}
+shout() {
+  # TODO: HELLO, <name>
   echo ""
 }

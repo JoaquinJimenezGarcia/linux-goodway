@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
-# sum_field2: read stdin lines "name count" and sum counts
 sum_field2() {
-  # TODO
+  # TODO: sum second field from stdin
+  echo 0
+}
+max_field2() {
+  # TODO: max second field
   echo 0
 }

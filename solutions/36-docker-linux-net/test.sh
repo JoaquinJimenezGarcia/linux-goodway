@@ -30,7 +30,10 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/solution.sh"
 
-run_tests() { assert_eq "$(default_docker_network)" "bridge" net; }
+run_tests() {
+  assert_eq "$(default_docker_network)" "bridge" net
+  assert_eq "$(host_docker_network)" "host" host
+}
 
 run_tests
 

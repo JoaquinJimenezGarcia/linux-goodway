@@ -34,6 +34,8 @@ run_tests() {
   assert_eq "$(success_code)" "0" success
   local f; f=$(failure_code)
   [[ "$f" != "0" && -n "$f" ]] && pass=$((pass+1)) || { echo FAIL failure_code; fail=$((fail+1)); }
+  assert_eq "$(is_success 0)" "yes" ok
+  assert_eq "$(is_success 1)" "no" bad
 }
 
 run_tests

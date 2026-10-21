@@ -18,11 +18,114 @@ def load_modules():
     return mod.MODULES
 
 
+def exercise_readme(m: dict) -> str:
+    objs = "\n".join(f"- {o}" for o in m["objectives"])
+    guide = (m.get("exercise_guide") or "").strip()
+    if not guide:
+        guide = (
+            f"Open `exercise.sh` and implement every stub so `./test.sh` passes. "
+            f"Each function name maps to an idea from **{m['title']}** — re-read that section "
+            f"of the lesson if a test fails."
+        )
+    examples = (m.get("exercise_examples") or "").strip()
+    if not examples:
+        examples = (
+            "Worked examples live in the lesson body (commands with expected-style output). "
+            "Mirror that behavior in your functions; do not hard-code unrelated strings."
+        )
+    return f"""# Exercise: {m['n']:02d}. {m['title']}
+
+## Goal
+
+Turn the lesson into **working skill**. Reading is not enough — you must retrieve and apply the ideas.
+
+## Concepts from the lesson
+
+{objs}
+
+## Task
+
+{guide}
+
+## Files
+
+| File | Role |
+|------|------|
+| `exercise.sh` | Your implementation (edit this) |
+| `test.sh` | Automated checks — run until green |
+| `../solutions/{m['slug']}/` | Reference only **after** a real attempt |
+
+## Examples / expected behavior
+
+{examples}
+
+## How to work
+
+1. Skim this README, then re-open `lessons/{m['slug']}/lesson.md` (or the PDF).
+2. Run `./test.sh` once to see what fails — failures are a checklist.
+3. Implement one function at a time; re-run tests after each change.
+4. When stuck, re-run the **lab commands** from the lesson on a real shell and compare.
+5. After all tests pass: explain each function out loud in one sentence.
+
+## Hints
+
+- Prefer the simplest correct shell that matches the lesson vocabulary.
+- Quote variables; check exit codes the way the lesson showed.
+- If output has extra spaces/newlines, trim with the same patterns used in the lesson.
+
+## Done when
+
+- `./test.sh` prints all passes and exits 0
+- You can redo the exercise tomorrow without looking at your first solution
+
+**Do not open the solutions folder until you have struggled for a real attempt (15+ minutes).**
+"""
+
+
 def lesson_md(m: dict) -> str:
     objs = "\n".join(f"- {o}" for o in m["objectives"])
     pits = "\n".join(f"- {p}" for p in m["pitfalls"])
     checks = "\n".join(f"{i}. {c}" for i, c in enumerate(m["checks"], 1))
     reads = "\n".join(f"- {r}" for r in m["reading"])
+    guide = (m.get("exercise_guide") or "").strip()
+    if guide:
+        ex_section = f"""## Exercises
+
+Work in `exercises/{m['slug']}/`. Read that folder's `README.md` fully before coding.
+
+```bash
+cd exercises/{m['slug']}
+chmod +x test.sh exercise.sh
+./test.sh
+```
+
+### What you will build
+
+{guide}
+
+### Study loop
+
+- **A (Drill):** make `./test.sh` pass
+- **B (Apply):** run 2–3 lab commands from this lesson on a real Linux host; paste notable output into your notes
+- **C (Challenge):** rewrite the exercise from memory the next day
+
+**Do not open `solutions/{m['slug']}/` until you have an honest failing attempt.**
+"""
+    else:
+        ex_section = f"""## Exercises
+
+Work in `exercises/{m['slug']}/`. Read `README.md`, then run:
+
+```bash
+./test.sh
+```
+
+- **A (Drill):** make `./test.sh` pass
+- **B (Apply):** note one real command you ran on a Linux host related to this lesson
+- **C (Challenge):** rewrite your solution from memory the next day
+
+**Do not open `solutions/{m['slug']}/` until you have an honest failing attempt.**
+"""
     return f"""---
 title: "{m['n']:02d}. {m['title']}"
 ---
@@ -40,6 +143,7 @@ title: "{m['n']:02d}. {m['title']}"
 ## Prerequisites
 
 Complete prior numbered lessons. Prefer a real Linux VM/container for Linux-specific topics.
+Type every command yourself — muscle memory beats skimming.
 
 {m['body'].strip()}
 
@@ -47,21 +151,10 @@ Complete prior numbered lessons. Prefer a real Linux VM/container for Linux-spec
 
 {pits}
 
-## Exercises
-
-Work in `exercises/{m['slug']}/`. Run:
-
-```bash
-./test.sh
-```
-
-- **A (Drill):** make `./test.sh` pass
-- **B (Apply):** note one real command you ran on a Linux host related to this lesson
-- **C (Challenge):** rewrite your solution from memory the next day
-
-**Do not open `solutions/{m['slug']}/` until you have an honest failing attempt.**
-
+{ex_section}
 ## Self-check
+
+Try to answer without scrolling up:
 
 {checks}
 
@@ -918,8 +1011,15 @@ graceful_stop_signal() { echo TERM; }
     '''run_tests() { assert_eq "$(graceful_stop_signal)" "TERM" term; }''',
 )
 
+# Enrich trivial quiz stubs with related helpers + clearer comments.
+from exercise_enrichments import apply as _apply_exercise_enrichments  # noqa: E402
 
-def write_exercise(slug: str, kind: str):
+_apply_exercise_enrichments(EX, ex)
+
+
+def write_exercise(m: dict):
+    slug = m["slug"]
+    kind = m["ex_kind"]
     if kind not in EX:
         raise SystemExit(f"missing exercise kind: {kind}")
     starter, solution, run_tests = EX[kind]
@@ -929,10 +1029,6 @@ def write_exercise(slug: str, kind: str):
     sol_dir.mkdir(parents=True, exist_ok=True)
 
     (ex_dir / "exercise.sh").write_text(starter, encoding="utf-8")
-    test_sh = HARNESS.replace(
-        'source "$ROOT/solution.sh" 2>/dev/null || source "$ROOT/exercise.sh"',
-        'source "$ROOT/exercise.sh"',
-    ).replace("# shellcheck disable=SC1091\nsource \"$ROOT/exercise.sh\"", 'source "$ROOT/exercise.sh"')
     # Build exercise test.sh
     ex_test = HARNESS.replace(
         'source "$ROOT/solution.sh" 2>/dev/null || source "$ROOT/exercise.sh"',
@@ -941,10 +1037,7 @@ def write_exercise(slug: str, kind: str):
     # Insert run_tests before the call
     ex_test = ex_test.replace("run_tests\n", run_tests + "\nrun_tests\n")
     (ex_dir / "test.sh").write_text(ex_test, encoding="utf-8")
-    (ex_dir / "README.md").write_text(
-        "Implement functions in `exercise.sh`, then run `./test.sh`.\n",
-        encoding="utf-8",
-    )
+    (ex_dir / "README.md").write_text(exercise_readme(m), encoding="utf-8")
 
     (sol_dir / "solution.sh").write_text(solution, encoding="utf-8")
     sol_test = HARNESS.replace(
@@ -954,7 +1047,8 @@ def write_exercise(slug: str, kind: str):
     sol_test = sol_test.replace("run_tests\n", run_tests + "\nrun_tests\n")
     (sol_dir / "test.sh").write_text(sol_test, encoding="utf-8")
     (sol_dir / "README.md").write_text(
-        "Reference solution. Study only after attempting the exercise.\n",
+        "Reference solution. Study only after attempting the exercise.\n\n"
+        "Compare approach and style, then close this file and rewrite from memory tomorrow.\n",
         encoding="utf-8",
     )
 
@@ -1053,7 +1147,7 @@ def main():
         d = ROOT / "lessons" / m["slug"]
         d.mkdir(parents=True, exist_ok=True)
         (d / "lesson.md").write_text(lesson_md(m), encoding="utf-8")
-        write_exercise(m["slug"], m["ex_kind"])
+        write_exercise(m)
 
     write_readme(modules)
     write_progress(modules)

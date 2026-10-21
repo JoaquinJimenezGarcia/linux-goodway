@@ -33,6 +33,7 @@ source "$ROOT/exercise.sh"
 run_tests() {
   assert_eq "$(signal_num TERM)" "15" term
   assert_eq "$(signal_num KILL)" "9" kill
+  assert_eq "$(prefer_first_signal)" "TERM" prefer
 }
 
 run_tests

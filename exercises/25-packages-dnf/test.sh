@@ -34,6 +34,8 @@ run_tests() {
   assert_eq "$(map_install_cmd debian)" "apt" a
   assert_eq "$(map_install_cmd rhel)" "dnf" d
   assert_eq "$(map_install_cmd alpine)" "apk" k
+  assert_eq "$(map_query_cmd debian)" "apt" qa
+  assert_eq "$(map_query_cmd rhel)" "rpm" qr
 }
 
 run_tests

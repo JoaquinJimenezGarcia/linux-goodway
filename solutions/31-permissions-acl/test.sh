@@ -30,7 +30,10 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/solution.sh"
 
-run_tests() { assert_eq "$(file_mode_after_umask022)" "644" umask; }
+run_tests() {
+  assert_eq "$(file_mode_after_umask022)" "644" umask
+  assert_eq "$(dir_mode_after_umask022)" "755" dir
+}
 
 run_tests
 

@@ -30,7 +30,10 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/exercise.sh"
 
-run_tests() { assert_eq "$(prefer_deploy_artifact)" "immutable-artifact" art; }
+run_tests() {
+  assert_eq "$(prefer_deploy_artifact)" "immutable-artifact" art
+  assert_eq "$(avoid_deploy_method)" "git-pull-on-prod" avoid
+}
 
 run_tests
 

@@ -30,7 +30,10 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/exercise.sh"
 
-run_tests() { assert_eq "$(openssl_show_dates_flag)" "-dates" dates; }
+run_tests() {
+  assert_eq "$(openssl_show_dates_flag)" "-dates" dates
+  assert_eq "$(openssl_show_subject_flag)" "-subject" subj
+}
 
 run_tests
 

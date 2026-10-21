@@ -30,7 +30,10 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/exercise.sh"
 
-run_tests() { assert_eq "$(graceful_stop_signal)" "TERM" term; }
+run_tests() {
+  assert_eq "$(graceful_stop_signal)" "TERM" term
+  assert_eq "$(force_stop_signal)" "KILL" kill
+}
 
 run_tests
 

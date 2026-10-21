@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-# checklist_min_ports: print "22,80,443" as allowed example set for web+ssh
-checklist_min_ports() { echo ""; }
+checklist_min_ports() { echo ""; }  # 22,80,443
+checklist_ssh_only() { echo ""; }   # 22

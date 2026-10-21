@@ -30,7 +30,10 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/solution.sh"
 
-run_tests() { assert_eq "$(journal_unit_flag)" "-u" j; }
+run_tests() {
+  assert_eq "$(journal_unit_flag)" "-u" j
+  assert_eq "$(journal_since_flag)" "-S" since
+}
 
 run_tests
 

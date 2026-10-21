@@ -37,6 +37,13 @@ run_tests() {
   local rc=$?
   set -e
   assert_eq "$rc" "1" empty
+  set +e
+  assert_nonempty ""
+  rc=$?
+  set -e
+  assert_eq "$rc" "1" nonempty
+  assert_nonempty x
+  assert_eq "$?" "0" nonempty_ok
 }
 
 run_tests

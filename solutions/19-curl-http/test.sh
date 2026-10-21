@@ -33,6 +33,8 @@ source "$ROOT/solution.sh"
 run_tests() {
   assert_eq "$(http_ok 200)" "yes" y
   assert_eq "$(http_ok 500)" "no" n
+  assert_eq "$(http_redirect 301)" "yes" r
+  assert_eq "$(http_redirect 200)" "no" nr
 }
 
 run_tests

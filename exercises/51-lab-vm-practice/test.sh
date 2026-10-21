@@ -30,7 +30,10 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/exercise.sh"
 
-run_tests() { assert_eq "$(lab_safety_tool)" "snapshots" snap; }
+run_tests() {
+  assert_eq "$(lab_safety_tool)" "snapshots" snap
+  assert_eq "$(lab_first_action)" "snapshot-or-backup" first
+}
 
 run_tests
 

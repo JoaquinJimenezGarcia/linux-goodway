@@ -32,6 +32,7 @@ source "$ROOT/exercise.sh"
 
 run_tests() {
   assert_eq "$(parse_uid 'uid=1000(ada) gid=1000(ada)')" "1000" uid
+  assert_eq "$(parse_user 'uid=1000(ada) gid=1000(ada)')" "ada" user
 }
 
 run_tests

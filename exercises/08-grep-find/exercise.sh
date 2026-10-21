@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
-# match_todo LINE -> "yes" if contains TODO else "no"
 match_todo() {
-  # TODO
+  # TODO: yes if LINE contains TODO
+  echo ""
+}
+match_fixme() {
+  # TODO: yes if LINE contains FIXME
   echo ""
 }

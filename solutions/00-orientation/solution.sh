@@ -1,4 +1,3 @@
 #!/usr/bin/env bash
-greet() {
-  echo "Hello, $1"
-}
+greet() { echo "Hello, $1"; }
+farewell() { echo "Goodbye, $1"; }

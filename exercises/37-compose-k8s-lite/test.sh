@@ -30,7 +30,10 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/exercise.sh"
 
-run_tests() { assert_eq "$(kubectl_logs_cmd)" "kubectl logs" logs; }
+run_tests() {
+  assert_eq "$(kubectl_logs_cmd)" "kubectl logs" logs
+  assert_eq "$(kubectl_get_pods_cmd)" "kubectl get pods" pods
+}
 
 run_tests
 

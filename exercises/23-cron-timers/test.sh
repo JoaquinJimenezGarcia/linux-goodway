@@ -30,7 +30,10 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/exercise.sh"
 
-run_tests() { assert_eq "$(cron_daily_3am)" "0 3 * * *" cron; }
+run_tests() {
+  assert_eq "$(cron_daily_3am)" "0 3 * * *" cron
+  assert_eq "$(cron_hourly)" "0 * * * *" hourly
+}
 
 run_tests
 

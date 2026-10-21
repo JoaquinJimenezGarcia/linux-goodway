@@ -30,7 +30,10 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/exercise.sh"
 
-run_tests() { assert_eq "$(tmux_detach_keys)" "ctrl-b d" tmux; }
+run_tests() {
+  assert_eq "$(tmux_detach_keys)" "ctrl-b d" tmux
+  assert_eq "$(background_operator)" "&" bg
+}
 
 run_tests
 

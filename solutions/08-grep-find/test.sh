@@ -33,6 +33,8 @@ source "$ROOT/solution.sh"
 run_tests() {
   assert_eq "$(match_todo 'fix TODO')" "yes" y
   assert_eq "$(match_todo 'clean')" "no" n
+  assert_eq "$(match_fixme 'FIXME later')" "yes" f
+  assert_eq "$(match_fixme 'ok')" "no" fn
 }
 
 run_tests

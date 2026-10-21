@@ -30,7 +30,10 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/exercise.sh"
 
-run_tests() { assert_eq "$(avoid_docker_flag)" "--privileged" priv; }
+run_tests() {
+  assert_eq "$(avoid_docker_flag)" "--privileged" priv
+  assert_eq "$(prefer_cap_action)" "drop" drop
+}
 
 run_tests
 

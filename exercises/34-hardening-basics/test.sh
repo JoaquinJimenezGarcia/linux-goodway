@@ -30,7 +30,10 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/exercise.sh"
 
-run_tests() { assert_eq "$(count_baseline_items)" "5" n; }
+run_tests() {
+  assert_eq "$(count_baseline_items)" "5" n
+  assert_eq "$(password_auth_on_internet)" "disable" pw
+}
 
 run_tests
 

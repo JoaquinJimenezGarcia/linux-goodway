@@ -30,7 +30,10 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/exercise.sh"
 
-run_tests() { assert_eq "$(checklist_min_ports)" "22,80,443" ports; }
+run_tests() {
+  assert_eq "$(checklist_min_ports)" "22,80,443" ports
+  assert_eq "$(checklist_ssh_only)" "22" ssh
+}
 
 run_tests
 

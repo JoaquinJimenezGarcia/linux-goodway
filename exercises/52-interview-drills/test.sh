@@ -30,7 +30,10 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/exercise.sh"
 
-run_tests() { assert_eq "$(incident_first_10m)" "define-scope-gather-evidence" oncall; }
+run_tests() {
+  assert_eq "$(incident_first_10m)" "define-scope-gather-evidence" oncall
+  assert_eq "$(incident_avoid_early)" "random-restarts" avoid
+}
 
 run_tests
 

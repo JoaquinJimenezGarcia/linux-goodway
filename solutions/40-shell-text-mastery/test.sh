@@ -31,10 +31,8 @@ assert_file() {
 source "$ROOT/solution.sh"
 
 run_tests() {
-  assert_eq "$(printf 'a
-b
-a
-' | top_token)" "a" top
+  assert_eq "$(printf 'a\nb\na\n' | top_token)" "a" top
+  assert_eq "$(printf 'a\nb\na\n' | count_unique)" "2" uniq
 }
 
 run_tests

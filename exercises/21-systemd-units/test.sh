@@ -30,7 +30,10 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/exercise.sh"
 
-run_tests() { assert_eq "$(enable_now_meaning)" "start-and-boot" en; }
+run_tests() {
+  assert_eq "$(enable_now_meaning)" "start-and-boot" en
+  assert_eq "$(journal_follow_flag)" "-f" follow
+}
 
 run_tests
 

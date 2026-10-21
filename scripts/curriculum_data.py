@@ -6,7 +6,21 @@ from __future__ import annotations
 MODULES: list[dict] = []
 
 
-def add(n, slug, title, phase, days, objectives, body, pitfalls, checks, reading, ex_kind):
+def add(
+    n,
+    slug,
+    title,
+    phase,
+    days,
+    objectives,
+    body,
+    pitfalls,
+    checks,
+    reading,
+    ex_kind,
+    exercise_guide="",
+    exercise_examples="",
+):
     MODULES.append(
         {
             "n": n,
@@ -20,6 +34,8 @@ def add(n, slug, title, phase, days, objectives, body, pitfalls, checks, reading
             "checks": checks,
             "reading": reading,
             "ex_kind": ex_kind,
+            "exercise_guide": exercise_guide,
+            "exercise_examples": exercise_examples,
         }
     )
 
@@ -1635,3 +1651,24 @@ Prepare a Linux host (VM is fine without real GPU) as if serving a model API:
     ["How bound resources?", "What happens on SIGTERM?", "Which ports exposed?"],
     ["https://www.freedesktop.org/software/systemd/man/systemd.resource-control.html"],
     "cap_ai")
+
+
+def _apply_expanded_bodies() -> None:
+    """Overlay full lesson bodies and exercise guides from scripts/batches/."""
+    from batches.batch_00_13 import EXTRA as e0
+    from batches.batch_14_27 import EXTRA as e1
+    from batches.batch_28_41 import EXTRA as e2
+    from batches.batch_42_55 import EXTRA as e3
+
+    extra = {**e0, **e1, **e2, **e3}
+    missing = [m["n"] for m in MODULES if m["n"] not in extra]
+    if missing:
+        raise RuntimeError(f"expanded bodies missing for modules: {missing}")
+    for m in MODULES:
+        e = extra[m["n"]]
+        m["body"] = e["body"]
+        m["exercise_guide"] = e["exercise_guide"]
+        m["exercise_examples"] = e["exercise_examples"]
+
+
+_apply_expanded_bodies()

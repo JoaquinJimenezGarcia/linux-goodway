@@ -30,7 +30,10 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/exercise.sh"
 
-run_tests() { assert_eq "$(firewall_default_inbound)" "deny" deny; }
+run_tests() {
+  assert_eq "$(firewall_default_inbound)" "deny" deny
+  assert_eq "$(firewall_default_outbound_lab)" "allow" allow
+}
 
 run_tests
 

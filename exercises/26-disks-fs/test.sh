@@ -30,7 +30,10 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/exercise.sh"
 
-run_tests() { assert_eq "$(inode_check_flag)" "-i" inodes; }
+run_tests() {
+  assert_eq "$(inode_check_flag)" "-i" inodes
+  assert_eq "$(df_human_flag)" "-h" human
+}
 
 run_tests
 

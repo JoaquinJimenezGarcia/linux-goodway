@@ -30,7 +30,10 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/solution.sh"
 
-run_tests() { assert_eq "$(vim_quit_nosave)" ":q!" vim; }
+run_tests() {
+  assert_eq "$(vim_quit_nosave)" ":q!" vim
+  assert_eq "$(less_quit_key)" "q" less
+}
 
 run_tests
 

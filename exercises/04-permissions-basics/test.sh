@@ -33,6 +33,8 @@ source "$ROOT/exercise.sh"
 run_tests() {
   assert_eq "$(octal_to_human 755)" "rwxr-xr-x" 755
   assert_eq "$(octal_to_human 644)" "rw-r--r--" 644
+  assert_eq "$(is_world_writable 666)" "yes" ww
+  assert_eq "$(is_world_writable 644)" "no" nw
 }
 
 run_tests

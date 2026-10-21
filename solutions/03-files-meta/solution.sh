@@ -6,3 +6,6 @@ link_kind() {
     *) echo unknown ;;
   esac
 }
+same_inode_possible() {
+  case "$1" in hard) echo yes ;; soft) echo no ;; *) echo unknown ;; esac
+}

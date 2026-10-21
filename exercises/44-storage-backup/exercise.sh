@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-# rpo_means -> "max-data-loss-window"
-rpo_means() { echo ""; }
+rpo_means() { echo ""; }  # max-data-loss-window
+rto_means() { echo ""; }  # max-downtime-window

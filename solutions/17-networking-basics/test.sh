@@ -30,7 +30,11 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/solution.sh"
 
-run_tests() { assert_eq "$(default_https_port)" "443" https; }
+run_tests() {
+  assert_eq "$(default_https_port)" "443" https
+  assert_eq "$(default_http_port)" "80" http
+  assert_eq "$(default_ssh_port)" "22" ssh
+}
 
 run_tests
 

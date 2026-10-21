@@ -33,6 +33,8 @@ source "$ROOT/exercise.sh"
 run_tests() {
   assert_eq "$(link_kind soft)" "symbolic" soft
   assert_eq "$(link_kind hard)" "hard" hard
+  assert_eq "$(same_inode_possible hard)" "yes" inode
+  assert_eq "$(same_inode_possible soft)" "no" softinode
 }
 
 run_tests

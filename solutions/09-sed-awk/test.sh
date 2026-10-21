@@ -31,9 +31,8 @@ assert_file() {
 source "$ROOT/solution.sh"
 
 run_tests() {
-  assert_eq "$(printf 'a 2
-b 5
-' | sum_field2)" "7" sum
+  assert_eq "$(printf 'a 2\nb 5\n' | sum_field2)" "7" sum
+  assert_eq "$(printf 'a 2\nb 5\n' | max_field2)" "5" max
 }
 
 run_tests

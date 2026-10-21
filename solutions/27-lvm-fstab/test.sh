@@ -32,6 +32,7 @@ source "$ROOT/solution.sh"
 
 run_tests() {
   assert_eq "$(fstab_field_uuid 'UUID=abc /data ext4 defaults 0 2')" "UUID=abc" uuid
+  assert_eq "$(fstab_mountpoint 'UUID=abc /data ext4 defaults 0 2')" "/data" mnt
 }
 
 run_tests

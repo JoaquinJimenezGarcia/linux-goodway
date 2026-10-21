@@ -30,7 +30,10 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/solution.sh"
 
-run_tests() { assert_eq "$(rpo_means)" "max-data-loss-window" rpo; }
+run_tests() {
+  assert_eq "$(rpo_means)" "max-data-loss-window" rpo
+  assert_eq "$(rto_means)" "max-downtime-window" rto
+}
 
 run_tests
 

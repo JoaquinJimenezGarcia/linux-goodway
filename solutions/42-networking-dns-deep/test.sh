@@ -30,7 +30,10 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/solution.sh"
 
-run_tests() { assert_eq "$(nxdomain_means)" "name-not-exist" nx; }
+run_tests() {
+  assert_eq "$(nxdomain_means)" "name-not-exist" nx
+  assert_eq "$(servfail_means)" "resolver-error" sf
+}
 
 run_tests
 

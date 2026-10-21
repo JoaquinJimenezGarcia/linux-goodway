@@ -33,6 +33,7 @@ source "$ROOT/solution.sh"
 run_tests() {
   assert_eq "$(abs_join /home/ada docs/a)" "/home/ada/docs/a" join
   assert_eq "$(abs_join /home/ada/ docs/a)" "/home/ada/docs/a" join2
+  assert_eq "$(basename_of /home/ada/docs)" "docs" base
 }
 
 run_tests

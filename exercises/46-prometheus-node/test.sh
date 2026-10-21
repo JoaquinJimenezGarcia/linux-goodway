@@ -30,7 +30,10 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/exercise.sh"
 
-run_tests() { assert_eq "$(alert_on_disk_pct)" "90" disk; }
+run_tests() {
+  assert_eq "$(alert_on_disk_pct)" "90" disk
+  assert_eq "$(alert_on_mem_pct)" "95" mem
+}
 
 run_tests
 

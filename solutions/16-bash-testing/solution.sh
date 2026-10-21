@@ -4,3 +4,7 @@ safe_dir_or_die() {
   [[ -n "$d" ]] || return 1
   echo "$d"
 }
+assert_nonempty() {
+  [[ -n "${1:-}" ]] || return 1
+  return 0
+}

@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
-# count_lines multiline string on stdin -> number of lines
 count_lines() {
-  # TODO read stdin
+  # TODO: lines on stdin
+  echo 0
+}
+count_words() {
+  # TODO: words on stdin
   echo 0
 }

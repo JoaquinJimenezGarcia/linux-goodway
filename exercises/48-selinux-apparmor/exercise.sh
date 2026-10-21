@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-# mac_for_distro rhel|ubuntu -> selinux|apparmor
-mac_for_distro() { echo ""; }
+mac_for_distro() { echo ""; }      # rhel->selinux ubuntu->apparmor
+mac_enforcing_word() { echo ""; }  # enforcing

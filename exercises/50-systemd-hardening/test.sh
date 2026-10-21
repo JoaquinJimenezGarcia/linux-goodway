@@ -30,7 +30,10 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/exercise.sh"
 
-run_tests() { assert_eq "$(nonewprivileges_directive)" "NoNewPrivileges=true" nnp; }
+run_tests() {
+  assert_eq "$(nonewprivileges_directive)" "NoNewPrivileges=true" nnp
+  assert_eq "$(protect_system_strict)" "ProtectSystem=strict" ps
+}
 
 run_tests
 

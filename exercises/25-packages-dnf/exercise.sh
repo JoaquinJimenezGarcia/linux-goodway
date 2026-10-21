@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-# map_install_cmd debian|rhel|alpine -> apt|dnf|apk
-map_install_cmd() { echo ""; }
+map_install_cmd() { echo ""; }  # debian->apt rhel->dnf alpine->apk
+map_query_cmd() { echo ""; }    # debian->apt rhel->rpm

@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
-# describe_sticky: print "owner-delete-only" explaining /tmp sticky behavior briefly (exact string)
+# Sticky /tmp: only owner (or root) can delete their files.
 describe_sticky() {
-  # TODO
+  # TODO -> owner-delete-only
+  echo ""
+}
+sticky_bit_digit() {
+  # TODO -> 1
   echo ""
 }

@@ -37,6 +37,7 @@ run_tests() {
   local rc=$?
   set -e
   assert_eq "$rc" "2" rc
+  assert_eq "$(arg_count a b c)" "3" count
 }
 
 run_tests

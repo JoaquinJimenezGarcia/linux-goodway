@@ -30,7 +30,10 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/exercise.sh"
 
-run_tests() { assert_eq "$(apt_update_does)" "refresh-indexes" apt; }
+run_tests() {
+  assert_eq "$(apt_update_does)" "refresh-indexes" apt
+  assert_eq "$(apt_upgrade_does)" "install-updates" up
+}
 
 run_tests
 

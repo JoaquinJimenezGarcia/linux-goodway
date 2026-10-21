@@ -30,7 +30,10 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/solution.sh"
 
-run_tests() { assert_eq "$(ssh_key_perms)" "600" perms; }
+run_tests() {
+  assert_eq "$(ssh_key_perms)" "600" perms
+  assert_eq "$(ssh_dir_perms)" "700" dir
+}
 
 run_tests
 

@@ -33,6 +33,7 @@ source "$ROOT/exercise.sh"
 run_tests() {
   assert_eq "$(hello)" "Hello, world" def
   assert_eq "$(hello Ada)" "Hello, Ada" arg
+  assert_eq "$(shout Ada)" "HELLO, Ada" shout
 }
 
 run_tests

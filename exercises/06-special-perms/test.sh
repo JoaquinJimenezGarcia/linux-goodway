@@ -30,7 +30,10 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/exercise.sh"
 
-run_tests() { assert_eq "$(describe_sticky)" "owner-delete-only" sticky; }
+run_tests() {
+  assert_eq "$(describe_sticky)" "owner-delete-only" sticky
+  assert_eq "$(sticky_bit_digit)" "1" bit
+}
 
 run_tests
 

@@ -30,7 +30,10 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/exercise.sh"
 
-run_tests() { assert_eq "$(inference_limit_knob)" "nofile" nofile; }
+run_tests() {
+  assert_eq "$(inference_limit_knob)" "nofile" nofile
+  assert_eq "$(memory_limit_knob)" "MemoryMax" mem
+}
 
 run_tests
 

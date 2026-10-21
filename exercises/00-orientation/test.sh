@@ -32,6 +32,7 @@ source "$ROOT/exercise.sh"
 
 run_tests() {
   assert_eq "$(greet Ada)" "Hello, Ada" greet
+  assert_eq "$(farewell Ada)" "Goodbye, Ada" farewell
 }
 
 run_tests

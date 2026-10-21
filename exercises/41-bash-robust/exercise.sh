@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-# cleanup_phrase -> "trap EXIT"
-cleanup_phrase() { echo ""; }
+cleanup_phrase() { echo ""; }   # trap EXIT
+graceful_signal() { echo ""; }  # TERM

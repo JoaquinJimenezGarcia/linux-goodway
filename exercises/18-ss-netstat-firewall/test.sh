@@ -30,7 +30,10 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/exercise.sh"
 
-run_tests() { assert_eq "$(ss_listening_flags)" "-tulpn" ss; }
+run_tests() {
+  assert_eq "$(ss_listening_flags)" "-tulpn" ss
+  assert_eq "$(ss_tcp_flag)" "-t" tcp
+}
 
 run_tests
 

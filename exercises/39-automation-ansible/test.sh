@@ -30,7 +30,10 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/exercise.sh"
 
-run_tests() { assert_eq "$(idempotent_means)" "same-result-if-repeated" id; }
+run_tests() {
+  assert_eq "$(idempotent_means)" "same-result-if-repeated" id
+  assert_eq "$(package_desired_state)" "present" pkg
+}
 
 run_tests
 

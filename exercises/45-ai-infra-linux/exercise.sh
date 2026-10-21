@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
-inference_limit_knob() { echo ""; } # nofile
+inference_limit_knob() { echo ""; }  # nofile
+memory_limit_knob() { echo ""; }     # MemoryMax

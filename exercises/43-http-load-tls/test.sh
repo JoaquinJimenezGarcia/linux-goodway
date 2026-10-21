@@ -30,7 +30,10 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/exercise.sh"
 
-run_tests() { assert_eq "$(tls_termination_means)" "decrypt-at-proxy" tls; }
+run_tests() {
+  assert_eq "$(tls_termination_means)" "decrypt-at-proxy" tls
+  assert_eq "$(backend_after_terminate)" "http" be
+}
 
 run_tests
 

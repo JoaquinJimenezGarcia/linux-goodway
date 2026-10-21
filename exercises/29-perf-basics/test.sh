@@ -32,7 +32,8 @@ source "$ROOT/exercise.sh"
 
 run_tests() {
   assert_eq "$(load_busy 2 4)" "yes" busy
-  assert_eq "$(load_busy 4 1)" "no" idle
+  assert_eq "$(load_busy 4 1)" "no" notbusy
+  assert_eq "$(load_idle 4 1)" "yes" idle
 }
 
 run_tests

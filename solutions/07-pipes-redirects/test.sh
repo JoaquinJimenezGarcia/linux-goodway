@@ -31,10 +31,8 @@ assert_file() {
 source "$ROOT/solution.sh"
 
 run_tests() {
-  assert_eq "$(printf 'a
-b
-c
-' | count_lines)" "3" lines
+  assert_eq "$(printf 'a\nb\nc\n' | count_lines)" "3" lines
+  assert_eq "$(printf 'a b c\n' | count_words)" "3" words
 }
 
 run_tests

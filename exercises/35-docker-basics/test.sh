@@ -30,7 +30,10 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/exercise.sh"
 
-run_tests() { assert_eq "$(docker_rm_flag_meaning)" "remove-on-exit" rm; }
+run_tests() {
+  assert_eq "$(docker_rm_flag_meaning)" "remove-on-exit" rm
+  assert_eq "$(docker_interactive_flags)" "-it" it
+}
 
 run_tests
 

@@ -30,7 +30,10 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/solution.sh"
 
-run_tests() { assert_eq "$(cleanup_phrase)" "trap EXIT" trap; }
+run_tests() {
+  assert_eq "$(cleanup_phrase)" "trap EXIT" trap
+  assert_eq "$(graceful_signal)" "TERM" term
+}
 
 run_tests
 

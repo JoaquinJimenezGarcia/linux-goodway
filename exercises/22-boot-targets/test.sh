@@ -30,7 +30,10 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/exercise.sh"
 
-run_tests() { assert_eq "$(pid1_name)" "systemd" pid1; }
+run_tests() {
+  assert_eq "$(pid1_name)" "systemd" pid1
+  assert_eq "$(multi_user_target)" "multi-user.target" target
+}
 
 run_tests
 

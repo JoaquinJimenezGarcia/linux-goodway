@@ -33,6 +33,7 @@ source "$ROOT/solution.sh"
 run_tests() {
   assert_eq "$(mac_for_distro rhel)" "selinux" s
   assert_eq "$(mac_for_distro ubuntu)" "apparmor" a
+  assert_eq "$(mac_enforcing_word)" "enforcing" enf
 }
 
 run_tests

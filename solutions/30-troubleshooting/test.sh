@@ -30,7 +30,10 @@ assert_file() {
 # shellcheck disable=SC1091
 source "$ROOT/solution.sh"
 
-run_tests() { assert_eq "$(first_troubleshooting_step)" "define-symptom" step; }
+run_tests() {
+  assert_eq "$(first_troubleshooting_step)" "define-symptom" step
+  assert_eq "$(second_troubleshooting_step)" "gather-evidence" step2
+}
 
 run_tests
 
